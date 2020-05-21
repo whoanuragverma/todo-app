@@ -4,10 +4,18 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Add, Delete, Info } from "@material-ui/icons";
+import {
+  Add,
+  Delete,
+  Info,
+  Cloud,
+  NewReleases,
+  Settings,
+} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 import { deepOrange } from "@material-ui/core/colors";
 import Divider from "@material-ui/core/Divider";
+import Chip from "@material-ui/core/Chip";
 const useStyles = (theme) => ({
   avatarStyle: {
     color: theme.palette.getContrastText(deepOrange[500]),
@@ -67,6 +75,25 @@ class DrawerItems extends React.Component {
             <Info className={this.props.classes.button} />
           </ListItemIcon>
           <ListItemText primary="About" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <Cloud className={this.props.classes.button} />
+          </ListItemIcon>
+          <ListItemText primary="Cloud Sync" />
+          <Chip
+            label="Upcoming"
+            icon={<NewReleases />}
+            size="small"
+            classes={{ colorPrimary: this.props.classes.avatarStyle }}
+            color="primary"
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Settings className={this.props.classes.button} />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
         </ListItem>
       </List>
     );

@@ -22,14 +22,14 @@ const useStyles = (theme) => ({
   },
   label: {
     "&$erroredLabel": {
-      color: deepOrange[300],
+      color: deepOrange[500],
     },
   },
   focusedLabel: {},
   erroredLabel: {},
   underline: {
     "&$error:after": {
-      borderBottomColor: deepOrange[300],
+      borderBottomColor: deepOrange[500],
     },
   },
   error: {},

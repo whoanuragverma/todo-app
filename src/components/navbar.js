@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { withStyles, fade } from "@material-ui/core/styles";
 import { Menu, Search } from "@material-ui/icons";
 import InputBase from "@material-ui/core/InputBase";
-import Drawer from "@material-ui/core/Drawer";
+import SwipableDrawer from "@material-ui/core/SwipeableDrawer";
 import DrawerItems from "../components/drawer";
 
 const useStyles = (theme) => ({
@@ -70,7 +70,7 @@ const useStyles = (theme) => ({
   drawerItems: {
     backgroundColor: "#353535",
     color: "#ffffff",
-    width: 250,
+    width: 300,
     paddingTop: theme.spacing(1),
   },
 });
@@ -109,13 +109,13 @@ class NavBar extends Component {
           >
             <Menu />
           </IconButton>
-          <Drawer
+          <SwipableDrawer
             open={this.state.anchor}
             onClose={this.closeDrawer}
             classes={{ paper: this.props.classes.drawerItems }}
           >
             <DrawerItems />
-          </Drawer>
+          </SwipableDrawer>
           <Typography variant="h6" className={this.props.classes.title}>
             Todos
           </Typography>
