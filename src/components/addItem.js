@@ -12,6 +12,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import { TextField } from "@material-ui/core";
 import CheckBox from "@material-ui/core/Checkbox";
+import AddItemtoDB from "../source/local";
 const useStyle = (theme) => ({
   root: {
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -22,6 +23,9 @@ const useStyle = (theme) => ({
     },
     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
       border: "none",
+    },
+    "& input.MuiInputBase-input.MuiOutlinedInput-input.AddItem-textField-163::-webkit-calendar-picker-indicator": {
+      display: "none",
     },
   },
   button: {
@@ -79,6 +83,8 @@ class AddItem extends React.Component {
       errorHelper: null,
       dueDate: "hidden",
       dueDateValue: null,
+      dueTime: "hidden",
+      dueTimeValue: "18:30",
     };
     this.addNew = this.addNew.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
@@ -86,7 +92,7 @@ class AddItem extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.hasDueDate = this.hasDueDate.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     let dd = new Date().getDate();
     let mm = new Date().getMonth();
     let yy = new Date().getFullYear();
@@ -106,10 +112,12 @@ class AddItem extends React.Component {
     if (this.state.dueDate === "hidden") {
       this.setState({
         dueDate: "date",
+        dueTime: "time",
       });
     } else {
       this.setState({
         dueDate: "hidden",
+        dueTime: "hidden",
       });
     }
   }
@@ -124,8 +132,11 @@ class AddItem extends React.Component {
         errorHelper: "Title is required!",
       });
     } else {
-      alert("Save to DB not yet available.");
-      console.log(this.state);
+      let d = new Date(
+        this.state.dueDateValue + "T" + this.state.dueTimeValue
+      ).getTime();
+      // console.log(d, this.state.dueDateValue + "T" + this.state.dueTimeValue);
+      AddItemtoDB(d, this.state);
       this.closeDialog();
     }
   }
@@ -142,6 +153,7 @@ class AddItem extends React.Component {
       title: null,
       description: null,
       dueDate: "hidden",
+      dueTime: "hidden",
     });
   }
   render() {
@@ -166,6 +178,8 @@ class AddItem extends React.Component {
             <DialogContentText>
               <TextField
                 variant="outlined"
+                autoComplete={false}
+                autoCapitalize={true}
                 placeholder="Title"
                 fullWidth
                 size="small"
@@ -201,7 +215,7 @@ class AddItem extends React.Component {
                 style={{ color: deepOrange[400] }}
                 onClick={this.hasDueDate}
               />
-              <span style={{ color: "#ffffff" }}>Add due date</span>
+              <span style={{ color: "#ffffff" }}>Add due date and time</span>
               <TextField
                 type={this.state.dueDate}
                 variant="outlined"
@@ -210,6 +224,21 @@ class AddItem extends React.Component {
                 fullWidth
                 onChange={this.handleChange}
                 defaultValue={this.state.dueDateValue}
+                InputProps={{
+                  classes: {
+                    input: this.props.classes.textField,
+                  },
+                }}
+              />
+
+              <TextField
+                type={this.state.dueTime}
+                variant="outlined"
+                name="dueTimeValue"
+                className={this.props.classes.root}
+                fullWidth
+                onChange={this.handleChange}
+                defaultValue={this.state.dueTimeValue}
                 InputProps={{
                   classes: {
                     input: this.props.classes.textField,
