@@ -2,3 +2,12 @@ body {
   margin: 0;
   background-color: #121212;
 }
+p.hidden {
+  display: none;
+}
+div#open-false {
+  display: none;
+}
+p.nonull {
+  display: none;
+}

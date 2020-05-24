@@ -85,6 +85,7 @@ class AddItem extends React.Component {
       dueDateValue: null,
       dueTime: "hidden",
       dueTimeValue: "18:30",
+      epochTime: null,
     };
     this.addNew = this.addNew.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
@@ -121,7 +122,7 @@ class AddItem extends React.Component {
       });
     }
   }
-  handleSubmit() {
+  async handleSubmit() {
     if (
       this.state.title === null ||
       this.state.title === "" ||
@@ -155,6 +156,7 @@ class AddItem extends React.Component {
       dueDate: "hidden",
       dueTime: "hidden",
     });
+    window.location.reload();
   }
   render() {
     return (

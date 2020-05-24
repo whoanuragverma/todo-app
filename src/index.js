@@ -5,12 +5,13 @@ import UserDialog from "./components/dialog";
 import AddItem from "./components/addItem";
 import * as serviceWorker from "./serviceWorker";
 import "./css/main.css";
-
+import ShowItem from "./components/showItem";
 ReactDOM.render(
   <React.Fragment>
     <UserDialog />
     <NavBar />
     <AddItem />
+    <ShowItem />
   </React.Fragment>,
   document.getElementById("root")
 );
